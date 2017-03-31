@@ -3,17 +3,21 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+    useLibrary 'org.apache.http.legacy'
+    // to use old HTTP connection library and NameValuePair
 
     defaultConfig {
         applicationId "edu.swarthmore.cs.thesexbutton"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 25
+        multiDexEnabled true
         versionCode 2
         versionName "2.0"
     }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -23,4 +27,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/activation.jar')
     compile 'com.google.android.gms:play-services:10.2.1'
+
 }

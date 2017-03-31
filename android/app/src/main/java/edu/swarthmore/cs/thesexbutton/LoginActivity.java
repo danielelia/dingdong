@@ -83,6 +83,10 @@ public class LoginActivity extends Activity {
                     if (!checkInternet()) {
                         Log.i(TAG, "No internet connection!");
                         Toast.makeText(context, "Please connect to the internet.", Toast.LENGTH_LONG).show();
+                    } else if (!checkBackendConnection("", "")) {
+                        // hacky way to check the backend
+                        Log.i(TAG, "No backend connection!");
+                        Toast.makeText(context, "The server appears tobe down.", Toast.LENGTH_LONG).show();
                     }
 
                     // Make sure device has Play Services APK and register for GCM
@@ -236,6 +240,23 @@ public class LoginActivity extends Activity {
         }
         return true;
     }
+
+    private boolean checkBackendConnection(String sessionToken, String orderNumber) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("session_token", sessionToken));
+        params.add(new BasicNameValuePair("order_number", orderNumber));
+
+        ServerRequest serverRequest = new ServerRequest(getApplicationContext());
+
+        try {
+            JSONObject json = serverRequest.getJSON("https://tsb.sccs.swarthmore.edu:8443/api/login", params);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
 
     /**
      * Gets the current registration ID for application on GCM service.
