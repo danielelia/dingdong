@@ -208,7 +208,7 @@ public class DeliveryStatusActivity extends Activity
         params.add(new BasicNameValuePair("order_number", mOrderNumber));
 
         ServerRequest serverRequest = new ServerRequest(getApplicationContext());
-        JSONObject json = serverRequest.getJSON("https://tsb.sccs.swarthmore.edu:8443/api/delivery/status", params);
+        JSONObject json = serverRequest.getJSON("https://tsb.memodi.co:8443/api/delivery/status", params);
 
         if(json != null) {
             try {

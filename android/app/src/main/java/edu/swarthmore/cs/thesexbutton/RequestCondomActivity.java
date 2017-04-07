@@ -140,7 +140,7 @@ public class RequestCondomActivity extends Activity implements AdapterView.OnIte
                     mParams.add(new BasicNameValuePair("delivery_type", mDeliveryType));
 
                     ServerRequest serverRequest = new ServerRequest(getApplicationContext());
-                    JSONObject json = serverRequest.getJSON("https://tsb.sccs.swarthmore.edu:8443/api/delivery/request", mParams);
+                    JSONObject json = serverRequest.getJSON("https://tsb.memodi.co:8443/api/delivery/request", mParams);
                     Log.i("RequestCondomActivity", mSessionToken + mDormName + mDormNumberString + mDeliveryType);
                     if (json != null) {
                         try {
@@ -182,7 +182,7 @@ public class RequestCondomActivity extends Activity implements AdapterView.OnIte
         ServerRequest serverRequest = new ServerRequest(getApplicationContext());
         ArrayList<NameValuePair> reqParams = new ArrayList<NameValuePair>();
         reqParams.add(new BasicNameValuePair("session_token", mSessionToken));
-        JSONObject response = serverRequest.getJSON("https://tsb.sccs.swarthmore.edu:8443/api/broadcast/announcement/get", reqParams);
+        JSONObject response = serverRequest.getJSON("https://tsb.memodi.co:8443/api/broadcast/announcement/get", reqParams);
         if (response != null) {
             try {
                 String open = response.getString("open_for_business");

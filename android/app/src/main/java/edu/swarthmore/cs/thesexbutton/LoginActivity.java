@@ -86,7 +86,7 @@ public class LoginActivity extends Activity {
                     } else if (!checkBackendConnection("", "")) {
                         // hacky way to check the backend
                         Log.i(TAG, "No backend connection!");
-                        Toast.makeText(context, "The server appears tobe down.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "The server appears to be down.", Toast.LENGTH_LONG).show();
                     }
 
                     // Make sure device has Play Services APK and register for GCM
@@ -155,7 +155,7 @@ public class LoginActivity extends Activity {
         params.add(new BasicNameValuePair("push_id", regid));
 
         ServerRequest serverRequest = new ServerRequest(getApplicationContext());
-        JSONObject json = serverRequest.getJSON("https://tsb.sccs.swarthmore.edu:8443/api/login", params);
+        JSONObject json = serverRequest.getJSON("https://tsb.memodi.co:8443/api/login", params);
 
         if (json != null) {
             try {
@@ -198,7 +198,7 @@ public class LoginActivity extends Activity {
         params.add(new BasicNameValuePair("order_number", orderNumber));
 
         ServerRequest serverRequest = new ServerRequest(getApplicationContext());
-        JSONObject json = serverRequest.getJSON("https://tsb.sccs.swarthmore.edu:8443/api/delivery/status", params);
+        JSONObject json = serverRequest.getJSON("https://tsb.memodi.co:8443/api/delivery/status", params);
 
         if (json != null) {
             try {
@@ -249,7 +249,7 @@ public class LoginActivity extends Activity {
         ServerRequest serverRequest = new ServerRequest(getApplicationContext());
 
         try {
-            JSONObject json = serverRequest.getJSON("https://tsb.sccs.swarthmore.edu:8443/api/login", params);
+            JSONObject json = serverRequest.getJSON("https://tsb.memodi.co:8443/api/login", params);
             return true;
         } catch (Exception e) {
             return false;

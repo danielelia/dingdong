@@ -26,7 +26,7 @@ var npid 	  = require('npid');
 // acquire PID file
 if (runWithHttps) {
     try {
-	var pid = npid.create('/var/run/tsb-node.pid');
+	var pid = npid.create('/var/run/tsb/tsb-node.pid');
 	pid.removeOnExit();
     } catch (err) {
 	console.log(err);

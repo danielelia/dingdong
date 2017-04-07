@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+import android.content.Context;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -24,6 +26,7 @@ public class RegisterActivity extends Activity {
     String mSignupTokenString, mDeviceUUID, mDeviceOS, mPassphrase, mRegid;
     List<NameValuePair> mParams;
     SharedPreferences mSharedPreferences;
+    Context context;
     private static String TAG = "RegisterActivity";
 
     /**
@@ -67,8 +70,15 @@ public class RegisterActivity extends Activity {
                 mParams.add(new BasicNameValuePair("passphrase", mPassphrase));
                 mParams.add(new BasicNameValuePair("push_id", mRegid));
 
-                ServerRequest serverRequest = new ServerRequest(getApplicationContext());
-                JSONObject json = serverRequest.getJSON("https://tsb.sccs.swarthmore.edu:8443/api/register", mParams);
+                JSONObject json;
+                try {
+                    ServerRequest serverRequest = new ServerRequest(getApplicationContext());
+                    json = serverRequest.getJSON("https://tsb.memodi.co:8443/api/register", mParams);
+                } catch (Exception e) {
+                    context = getApplicationContext();
+                    Toast.makeText(context, "The server appears to be down.", Toast.LENGTH_LONG).show();
+                    json = null;
+                }
 
                 if (json != null) {
                     try {
