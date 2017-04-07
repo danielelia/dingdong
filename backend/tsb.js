@@ -28,6 +28,7 @@ if (runWithHttps) {
     try {
 	var pid = npid.create('/var/run/tsb/tsb-node.pid');
 	pid.removeOnExit();
+	console.log("Successfully running with HTTPS")
     } catch (err) {
 	console.log(err);
 	process.exit(1);
